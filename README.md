@@ -3,9 +3,11 @@
 Design of a microcontroller with the given specifications using Verilog with FPGA
 Main Blocks: This microcontroller consists of three systems basically: memory, controller and ALU
 ----------------------
+
 Memory: Required data and instructions are stored in the memory. Using basic flip flops will be enough
 for this project.
 ----------------------
+
 Instruction Memory: It is the memory block which instructions are stored. Instructions are read by the
 controller and commands are given to the ALU. The content of the instruction data is predefined by the
 user. You can define the content in a specific region of your Verilog code. The content of the instruction
