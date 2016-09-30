@@ -1,7 +1,6 @@
 # Design-of-the-Basic-Microcontroller
 
 Design of a microcontroller with the given specifications using Verilog with FPGA
-
 Main Blocks: This microcontroller consists of three systems basically: memory, controller and ALU
 ----------------------
 Memory: Required data and instructions are stored in the memory. Using basic flip flops will be enough
