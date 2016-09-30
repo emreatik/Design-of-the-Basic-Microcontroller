@@ -1,0 +1,89 @@
+module controller(clk,clock_cycle,MAR,IR,IRE,DWE,DRE,reg1,vga);
+
+input clk;
+input [15:0] reg1;
+reg [5:0] PC; //Program Counter
+output reg IRE;
+output reg [15:0] IR;
+output reg [11:0] MAR;
+output reg [4:0] OPC; 
+output reg [6:0] OPR;
+output reg [15:0] vga;
+output reg clock_cycle =0;
+
+initial PC=0; 
+initial IRE=0;
+initial DRE=0;
+initial DWE=0;
+
+always @(posedge clk)
+begin
+begin
+case(clock_cycle)
+0:
+begin
+MAR[0]=PC[0];
+MAR[1]=PC[1];
+MAR[2]=PC[2];
+MAR[3]=PC[3];
+MAR[4]=PC[4];
+MAR[5]=PC[5];
+IRE=1; 
+DWE=1;
+end
+1:
+begin
+IR=MAR;
+IRE=0; DWE=0;
+end
+2:
+begin
+OPC[0]=IR[7];
+OPC[1]=IR[8];
+OPC[2]=IR[9];
+OPC[3]=IR[10];
+OPC[4]=IR[11];
+end
+3:
+begin
+OPR[0]=IR[0];
+OPR[1]=IR[1];
+OPR[2]=IR[2];
+OPR[3]=IR[3];
+OPR[4]=IR[4];
+OPR[5]=IR[5];
+OPR[6]=IR[6];
+MAR=0;
+MAR[0]=OPR[0];
+MAR[1]=OPR[1];
+MAR[2]=OPR[2];
+MAR[3]=OPR[3];
+MAR[4]=OPR[4];
+MAR[5]=OPR[5];
+MAR[6]=OPR[6];
+end
+4:
+begin
+DRE=1; //IR = M(MAR)
+end
+5:DRE=0; //Alu Operation
+6:MAR=IR; 
+7:
+begin
+if(PC<37)
+PC=PC+1;
+else
+begin
+PC=0;
+vga=reg1;
+end
+end
+endcase
+
+if(clock_cycle<8)
+clock_cycle=clock_cycle+1;
+else
+clock_cycle=0;
+
+end
+endmodule
