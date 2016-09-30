@@ -15,20 +15,28 @@ controller and commands are given to the ALU. The content of the instruction dat
 user. You can define the content in a specific region of your Verilog code. The content of the instruction
 memory is determined by the sets of instructions used in the operation of the microcontroller and your
 algorithm of application.
+
 ----------------------
+
 Data Memory: It stores the data taken from outside. ALU reads required data from this memory and
 uses it. Data taken from input ports are stored into the data memory. You can design your Data memory
 as a shift register to make write operation easier. However you should be able to read the stored data in
 any address of your data memory using microcontroller designed.
+
 ----------------------
+
 Controller: This unit will generate required signals between ALU and Memory units.
 The controller reads the instructions from instruction memory unit and sends required signals to ALU. In
 other words it translates from machine instructions to the control signals that implement them.
 It includes several registers such as PC (program counter), MAR (Memory Address Register), IR
 (Instruction register).
+
 ----------------------
+
 reg1(Accumulator): 16 bit register. It can be read or write enabled.
+
 ----------------------
+
 ALU(Arithmetic Logic Unit): The ALU is the basic part of the project where it makes the necessary
 operations by using the data stored in memory and the 16 bit register “reg1”. The command bits are
 used to determine the operation that is going to be done by using the input data in and register “reg1”.
@@ -40,13 +48,16 @@ address, then the required data should be read from that memory location first. 
 operation OPC is executed using the operand OPR.
 
 <img src="https://github.com/emreatik/Design-of-the-Basic-Microcontroller/blob/master/Basic%20Microcontroller.PNG"/>
+
 ----------------------
+
 Instruction Format
+
 ----------------------
+
 First five bit of the instruction is Opcode (OPC) and remaining seven bit is Operand (OPR). You can
 increase number of bits in OPR if needed. OPC represents the instruction code of the operation and OPR
 represents the data to be used in the operation. If the OPR is a memory address instead of data, then 
-8
 the required data should be read from that memory location first. In Execute cycle, the operation OPC is
 executed using the operand OPR.
 Each instruction lasts for 7 clock cycles. At 8th clock cycle, program counter increases its instruction
