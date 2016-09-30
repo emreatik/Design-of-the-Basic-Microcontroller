@@ -1,0 +1,41 @@
+module topmodule(clk,vga,adc,clock_cycle);
+input clk;
+input [15:0] adc [0:127];
+output [15:0] vga;
+wire [11:0] MAR;
+wire [15:0] IR;
+wire [15:0] adc;
+wire [4:0] OPC; 
+wire IRE,DWE,DRE,clock_cycle;
+wire [15:0] reg1;
+
+
+controller u1(
+.clk(clk),
+.clock_cycle(clock_cycle),
+.MAR(MAR),
+.IR(IR),
+.IRE(IRE),
+.DRE(DRE),
+.DWE(DWE),
+.reg1(reg1),
+.vga(vga)
+);
+
+memory u2(
+.clk(clk),
+.adc(adc),
+.MAR(MAR),
+.IR(IR)
+);
+
+alu u3(
+.clk(clk),
+.clock_cycle(clock_cycle),
+.OPC(OPC)
+.IR(IR),
+.reg1(reg1)
+);
+
+
+endmodule
